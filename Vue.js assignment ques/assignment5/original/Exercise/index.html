@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">
+							upgrade your browser</a> to improve your experience.</p>
+				<![endif]-->
+
+  <div id="exercise">
+    <!-- 1) Hook up the button to toggle the display of the two paragraphs. Use both v-if and v-show and inspect the elements to see the difference -->
+    <div>
+      <button @click="visible = !visible">Toggle</button>
+      <p v-if="visible">You either see me ...</p>
+      <p v-else>...or me</p>
+      <p v-show="visible">You either see me ...</p>
+      <p v-show="!visible">...or me</p>
+    </div>
+    <!-- 2) Output an <ul> of array elements of your choice. Also print the index of each element. -->
+    <ul>
+      <li v-for="(employer, index) in employers">{{employer.name}} ({{index}})</li>
+    </ul>
+    <!-- 3) Print all key-value pairs of the following object: {title: 'Lord of the Rings', author: 'J.R.R. Tolkiens', books: '3'}. Also print the index of each item. -->
+    <ul>
+      <li v-for="(value, key) in obj">{{key}}: {{value}}</li>
+    </ul>
+    <!-- 4) Print the following object (only the values) and also create a nested loop for the array: {name: 'TESTOBJECT', data: [1.67, 1.33, 0.98, 2.21]} (hint: use v-for and v-if to achieve this) -->
+    <ul>
+      <li v-for="(objValue, key, index) in obj2">
+        {{typeof(objValue)!== 'object' ? objValue : ''}} <div v-if="typeof(objValue)==='object'"
+          v-for="arrayValue in objValue">{{arrayValue}}</div>
+
+      </li>
+    </ul>
+  </div>
+
+
+  <script>
+    new Vue({
+      el: '#exercise',
+      data: {
+        visible: true,
+        employers: [
+          { name: 'Amazon', employeeNo: 400000, rank: 1 },
+          { name: 'TCS', employeeNo: 400000, rank: 2 },
+          { name: 'Google', employeeNo: 400000, rank: 3 }
+        ],
+        obj: { title: 'Lord of the Rings', author: 'J.R.R. Tolkiens', books: '3' },
+        obj2: { name: 'TESTOBJECT', data: [1.67, 1.33, 0.98, 2.21] }
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade 
+                your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+  <div id="exercise">
+    <!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
+    <div>
+      <button @click="startEffect">Start Effect</button>
+      <div id="effect" :class="alternateClasses"></div>
+    </div>
+    <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
+    <div :class="['attach1', attachTwo]">I got no class :(</div>
+    <!-- 3) Let the user enter a class (create some example classes) and attach it -->
+    <div>
+      <input type="text" v-model="className">
+      <div :class="[{visible: true}, className]"></div>
+    </div>
+    <!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
+    <div>
+      <input type="text" v-model="dummyClasses">
+      <input type="text" v-model="dummyClassesBoolean">
+      <div :class="[dummyClasses, {visible: dummyClassesBoolean}]"></div>
+    </div>
+    <!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+    <div>
+      <input type="text" v-model="enterStyle">
+      <div :style="{backgroundColor: enterStyle}">Here i am</div>
+    </div>
+    <!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
+    <div>
+      <button v-on:click="resetProgressbar">Start Progress</button>
+      <div :class="['progress-bar']" :style="progressBar"></div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#exercise',
+      data: {
+        alternate: false,
+        attachTwo: 'attachTwo',
+        className: '',
+        dummyClassesBoolean: false,
+        enterStyle: '',
+        progressBar: {
+          width: '0px',
+          backgroundColor: 'red'
+        }
+      },
+      computed: {
+        alternateClasses: function () {
+          return {
+            highlight: this.alternate,
+            shrink: !this.alternate
+          }
+        }
+      },
+      methods: {
+        startEffect: function () {
+          var vm = this;
+          setInterval(function () {
+            vm.alternate = !vm.alternate
+          }, 1000)
+        },
+        resetProgressbar: function () {
+          var vm = this;
+          var width = 0;
+
+          setInterval(function () {
+            width = width + 10;
+            vm.progressBar.width = width + 'px';
+          }, 500)
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
